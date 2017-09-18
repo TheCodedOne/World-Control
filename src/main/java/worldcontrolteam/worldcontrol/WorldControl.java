@@ -1,8 +1,6 @@
 package worldcontrolteam.worldcontrol;
 
-import java.io.File;
-import java.util.ArrayList;
-
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -15,12 +13,15 @@ import worldcontrolteam.worldcontrol.api.core.WorldControlAPI;
 import worldcontrolteam.worldcontrol.api.thermometer.IHeatSeeker;
 import worldcontrolteam.worldcontrol.crossmod.Modules;
 import worldcontrolteam.worldcontrol.init.WCBlocks;
-import worldcontrolteam.worldcontrol.items.ItemThermometer;
 import worldcontrolteam.worldcontrol.init.WCItems;
+import worldcontrolteam.worldcontrol.items.ItemThermometer;
 import worldcontrolteam.worldcontrol.network.ChannelHandler;
 import worldcontrolteam.worldcontrol.network.GuiHandler;
 import worldcontrolteam.worldcontrol.utils.WCConfig;
 import worldcontrolteam.worldcontrol.utils.WCUtility;
+
+import java.io.File;
+import java.util.ArrayList;
 
 @Mod(modid = WorldControl.MODID, version = "@VERSION@")
 public class WorldControl {
@@ -49,8 +50,10 @@ public class WorldControl {
 		WorldControlAPI.init(new WCapiImpl());
 		proxy.preinit(event);
 
-		WCItems.registerItems();
-		WCBlocks.registerBlocks();
+		MinecraftForge.EVENT_BUS.register(WCItems.class);
+		MinecraftForge.EVENT_BUS.register(WCBlocks.class);
+		//WCItems.registerItems();
+		//WCBlocks.registerBlocks();
 
 		proxy.registerItemTextures();
 

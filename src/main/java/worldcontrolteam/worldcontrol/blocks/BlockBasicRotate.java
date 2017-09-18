@@ -1,6 +1,5 @@
 package worldcontrolteam.worldcontrol.blocks;
 
-import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -14,6 +13,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public abstract class BlockBasicRotate extends BlockBasicTileProvider {
 
@@ -56,7 +57,7 @@ public abstract class BlockBasicRotate extends BlockBasicTileProvider {
 				EntityItem entityItem = new EntityItem(world, pos.getX() + rx, pos.getY() + ry, pos.getZ() + rz, new ItemStack(item.getItem(), item.getCount(), item.getItemDamage()));
 
 				if(item.hasTagCompound())
-					entityItem.getEntityItem().setTagCompound(item.getTagCompound().copy());
+					entityItem.getItem().setTagCompound(item.getTagCompound().copy());
 
 				float factor = 0.05F;
 				entityItem.motionX = rand.nextGaussian() * factor;

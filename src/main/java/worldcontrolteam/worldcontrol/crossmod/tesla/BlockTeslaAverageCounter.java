@@ -17,8 +17,8 @@ public class BlockTeslaAverageCounter extends BlockBasicTileProvider {
 		this.setUnlocalizedName("tesla_average_counter");
 		this.setCreativeTab(WorldControl.TAB);
 
-		GameRegistry.register(this);
-		GameRegistry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		//GameRegistry.register(this);
+		//GameRegistry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 
 	@Override

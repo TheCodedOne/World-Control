@@ -39,8 +39,6 @@ public class BlockIndustrialAlarm extends BlockBasicRotate{
         setRegistryName(name);
         setUnlocalizedName(name);
         setCreativeTab(WorldControl.TAB);
-        GameRegistry.register(this);
-        GameRegistry.register(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 
     @Override

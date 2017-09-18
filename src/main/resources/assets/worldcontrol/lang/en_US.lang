@@ -26,9 +26,6 @@ msg.worldcontrol.thermometer.mode=Mode: %s
 msg.worldcontrol.thermometer.unset=Unset
 msg.worldcontrol.thermometer.mode.ic2=IndustrialCraft 2
 
-###################
-#Card Strings
-###################
 msg.worldcontrol.card.cords=X: %1$d Y: %2$d Z: %3$d
 msg.worldcontrol.card.no_cords=Missing cordinates
 
@@ -70,8 +67,5 @@ msg.worldcontrol.forge_free=Free: %s FE
 msg.worldcontrol.forge_stored=Storage: %s FE
 
 
-###################
-#Block Messages
-###################
 msg.worldcontrol.HowlerAlarmSoundRange=Sound range: %s
 msg.worldcontrol.HowlerAlarmSound=Sound

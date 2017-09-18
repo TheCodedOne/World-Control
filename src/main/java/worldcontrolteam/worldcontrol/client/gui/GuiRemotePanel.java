@@ -1,16 +1,12 @@
 package worldcontrolteam.worldcontrol.client.gui;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 import worldcontrolteam.worldcontrol.api.card.IProviderCard;
 import worldcontrolteam.worldcontrol.api.card.StringWrapper;
 import worldcontrolteam.worldcontrol.inventory.InventoryItem;
@@ -18,6 +14,9 @@ import worldcontrolteam.worldcontrol.inventory.container.ContainerRemotePanel;
 import worldcontrolteam.worldcontrol.network.ChannelHandler;
 import worldcontrolteam.worldcontrol.network.messages.PacketServerRemotePanel;
 import worldcontrolteam.worldcontrol.utils.WCUtility;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class GuiRemotePanel extends GuiContainer {
 
@@ -40,6 +39,13 @@ public class GuiRemotePanel extends GuiContainer {
 	}
 
 	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		drawDefaultBackground();
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		renderHoveredToolTip(mouseX,mouseY);
+	}
+
+	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3){
 		GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 		this.mc.renderEngine.bindTexture(new ResourceLocation("worldcontrol", "textures/gui/gui_remote_panel.png"));
@@ -50,21 +56,18 @@ public class GuiRemotePanel extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2){
-		List<StringWrapper> joinedData = new LinkedList<StringWrapper>();
+		List<StringWrapper> joinedData = new LinkedList<>();
 		boolean anyCardFound = true;
 		InventoryItem itemInv = new InventoryItem(e.getHeldItemMainhand());
 
-		if(inv.getStackInSlot(0) != null && itemInv.getStackInSlot(0) != null && itemInv.getStackInSlot(0).getItem() instanceof IProviderCard){
+		if(!inv.getStackInSlot(0).isEmpty() && !itemInv.getStackInSlot(0).isEmpty() && itemInv.getStackInSlot(0).getItem() instanceof IProviderCard) {
 			IProviderCard card = (IProviderCard) inv.getStackInSlot(0).getItem();
-			// CardWrapperImpl helper = new
-			// CardWrapperImpl(itemInv.getStackInSlot(0), 0);
 			joinedData.clear();
 			ChannelHandler.network.sendToServer(new PacketServerRemotePanel(inv.getStackInSlot(0)));
 
-			if(true)
-				if(itemInv.getStackInSlot(0).hasTagCompound())
-					joinedData = card.getStringData(new LinkedList<StringWrapper>(), 0, itemInv.getStackInSlot(0), true);
-				else joinedData = getRemoteCustomMSG();
+			if (itemInv.getStackInSlot(0).hasTagCompound())
+				joinedData = card.getStringData(new LinkedList<>(), 0, itemInv.getStackInSlot(0), true);
+			else joinedData = getRemoteCustomMSG();
 
 			drawCardStuff(anyCardFound, joinedData);
 		}
@@ -96,13 +99,13 @@ public class GuiRemotePanel extends GuiContainer {
 		int row = 0;
 		for(StringWrapper panelString : joinedData){
 			if(panelString.textLeft != null)
-				fontRendererObj.drawString(panelString.textLeft, 9, row * 10 + 20, 0x06aee4);
+				fontRenderer.drawString(panelString.textLeft, 9, row * 10 + 20, 0x06aee4);
 
 			if(panelString.textCenter != null)
-				fontRendererObj.drawString(panelString.textCenter, (168 - fontRendererObj.getStringWidth(panelString.textCenter)) / 2, row * 10 + 20, 0x06aee4);
+				fontRenderer.drawString(panelString.textCenter, (168 - fontRenderer.getStringWidth(panelString.textCenter)) / 2, row * 10 + 20, 0x06aee4);
 
 			if(panelString.textRight != null)
-				this.fontRendererObj.drawString(panelString.textRight, 168 - fontRendererObj.getStringWidth(panelString.textRight), (row - 1) * 10 + 20, 0x06aee4);
+				this.fontRenderer.drawString(panelString.textRight, 168 - fontRenderer.getStringWidth(panelString.textRight), (row - 1) * 10 + 20, 0x06aee4);
 
 			row++;
 		}
@@ -112,7 +115,7 @@ public class GuiRemotePanel extends GuiContainer {
 	public void updateScreen(){
 		super.updateScreen();
 
-		if(this.e.getHeldItemMainhand() == null)
+		if(this.e.getHeldItemMainhand().isEmpty())
 			this.mc.player.closeScreen();
 	}
 }

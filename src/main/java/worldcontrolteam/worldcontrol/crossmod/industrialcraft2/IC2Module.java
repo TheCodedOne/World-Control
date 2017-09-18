@@ -27,7 +27,7 @@ public class IC2Module extends ModuleBase {
 		energyKit = new IC2EnergyStorageKit();
 
 		//temp.
-		GameRegistry.addRecipe(new ShapedOreRecipe(reactorKit, new Object[]{" c ", "cgc", " c ", 'g', "ingotGold", 'c', "circuitBasic"}));
+		//GameRegistry.addRecipe(new ShapedOreRecipe(reactorKit, new Object[]{" c ", "cgc", " c ", 'g', "ingotGold", 'c', "circuitBasic"}));
 
 	}
 
@@ -43,7 +43,7 @@ public class IC2Module extends ModuleBase {
 
 	@Override
 	public String modID(){ //TODO: change in 1.11
-		return "IC2";
+		return "ic2";
 	}
 
 	@Override

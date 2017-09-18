@@ -51,11 +51,9 @@ public class WCUtility {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static String translateFormatted(String key, Object... format){
+	public static String translateFormatted(String key, Object... format) {
 		key = "msg.worldcontrol." + key;
-		if(I18n.hasKey(key))// TODO: used undepreciated methods
-			return I18n.format(key, format);// I18n.translateToLocalFormatted(key, format);
-		else return I18n.format(key, format);
+		return I18n.format(key, format);
 	}
 
 	public static int RGBToInt(final int r, final int g, final int b){

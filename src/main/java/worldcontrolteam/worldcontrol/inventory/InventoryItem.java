@@ -10,6 +10,8 @@ import net.minecraft.util.text.TextComponentString;
 import worldcontrolteam.worldcontrol.items.ItemBaseCard;
 import worldcontrolteam.worldcontrol.items.ItemRemotePanel;
 
+import javax.annotation.Nonnull;
+
 public class InventoryItem implements IInventory, ISlotItemFilter {
 	private String name = "Inventory Item";
 
@@ -39,39 +41,44 @@ public class InventoryItem implements IInventory, ISlotItemFilter {
 	}
 
 	@Override
+	@Nonnull
 	public ItemStack getStackInSlot(int slot){
-		return inventory[slot];
+		return inventory[slot]==null?ItemStack.EMPTY:inventory[slot];
 	}
 
 	@Override
+	@Nonnull
 	public ItemStack decrStackSize(int slot, int amount){
 		ItemStack stack = getStackInSlot(slot);
 		if(stack != ItemStack.EMPTY)
 			if(stack.getCount() > amount){
 				stack = stack.splitStack(amount);
 				markDirty();
-			}else setInventorySlotContents(slot, null);
+			}else setInventorySlotContents(slot, ItemStack.EMPTY);
 		return stack;
 	}
 
 	@Override
+	@Nonnull
 	public ItemStack removeStackFromSlot(int slot){
 		ItemStack stack = getStackInSlot(slot);
 		if(stack != ItemStack.EMPTY)
-			setInventorySlotContents(slot, null);
+			setInventorySlotContents(slot, ItemStack.EMPTY);
 		return stack;
 	}
 
 	@Override
+	@Nonnull
 	public void setInventorySlotContents(int slot, ItemStack itemstack){
 		this.inventory[slot] = itemstack;
 
-		if(itemstack != null && itemstack.getCount() > this.getInventoryStackLimit())
+		if(!itemstack.isEmpty() && itemstack.getCount() > this.getInventoryStackLimit())
 			itemstack.setCount(this.getInventoryStackLimit());
 		markDirty();
 	}
 
 	@Override
+	@Nonnull
 	public String getName(){
 		return name;
 	}
@@ -82,6 +89,7 @@ public class InventoryItem implements IInventory, ISlotItemFilter {
 	}
 
 	@Override
+	@Nonnull
 	public ITextComponent getDisplayName(){
 		return new TextComponentString(name);
 	}

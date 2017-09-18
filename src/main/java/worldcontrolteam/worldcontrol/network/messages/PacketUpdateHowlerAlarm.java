@@ -46,7 +46,7 @@ public class PacketUpdateHowlerAlarm implements IMessage{
 
         @Override
         public IMessage onMessage(PacketUpdateHowlerAlarm message, MessageContext ctx) {
-            World world = ctx.getServerHandler().playerEntity.getEntityWorld();
+            World world = ctx.getServerHandler().player.getEntityWorld();
             TileEntity tile = world.getTileEntity(message.pos);
             if(tile instanceof TileEntityHowlerAlarm){
                 TileEntityHowlerAlarm alarm = (TileEntityHowlerAlarm) tile;

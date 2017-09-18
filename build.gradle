@@ -11,19 +11,30 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+		classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
 	}
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
+ext.configFile = file "build.properties"
+configFile.withReader {
+	def prop = new Properties()
+	prop.load(it)
+	project.ext.config = new ConfigSlurper().parse prop
+}
+
 version = "1.0.1a" //newWorldControlVersion
 group = "worldcontrolteam.worldcontrol"
 archivesBaseName = "worldcontrol"
 
-sourceCompatibility = targetCompatibility = "1.6" 
+ext.jarVer = "${config.minecraft_version}-${project.version}"
+ext.jarFile = zipTree(jar.archivePath)
+ext.baseExcludes = []
+
+sourceCompatibility = targetCompatibility = "1.8"
 compileJava {
-    sourceCompatibility = targetCompatibility = "1.6"
+    sourceCompatibility = targetCompatibility = "1.8"
 }
 
 repositories {
@@ -33,22 +44,25 @@ repositories {
 	}
 	maven {
 		name = "tesla"
-		url 'http://maven.epoxide.xyz'
+			url 'http://maven.epoxide.xyz'
+	}
+	maven {
+		name = "ic2"
+		url = "http://maven.ic2.player.to"
 	}
 }
 
 minecraft {
-	version = "1.11.2-13.20.1.2425" //forgeVersion
+	version = config.minecraft_version + "-" + config.forge_version
 	runDir = "run"
-	mappings = "snapshot_20161220" //mappingsVersion
+	mappings = config.mappings
 	replace "@VERSION@", project.version
-	useDepAts = true
 }
 
 dependencies {
-	deobfCompile "mezz.jei:jei_1.11.2:4.5.0.294"
-	compile "net.darkhax.tesla:Tesla:1.11-1.3.0.52"
-	compile files("libs/industrialcraft-2-2.7.74-ex111.jar")
+	deobfCompile "mezz.jei:jei_1.12.1:4.7.8.95"
+	compile "net.darkhax.tesla:Tesla-1.12:1.0.61"
+	deobfCompile 'net.industrial-craft:industrialcraft-2:2.8.25-ex112:dev'
 }
 
 processResources {

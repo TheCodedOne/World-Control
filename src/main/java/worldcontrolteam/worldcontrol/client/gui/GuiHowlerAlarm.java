@@ -1,7 +1,6 @@
 package worldcontrolteam.worldcontrol.client.gui;
 
 
-import java.util.List;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
@@ -13,6 +12,8 @@ import worldcontrolteam.worldcontrol.client.gui.features.HowlerAlarmSlider;
 import worldcontrolteam.worldcontrol.container.ContainerEmpty;
 import worldcontrolteam.worldcontrol.tileentity.TileEntityHowlerAlarm;
 import worldcontrolteam.worldcontrol.utils.WCConfig;
+
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiHowlerAlarm extends GuiContainer {
@@ -42,11 +43,9 @@ public class GuiHowlerAlarm extends GuiContainer {
         slider = new HowlerAlarmSlider(3, guiLeft + 12, guiTop + 33, "msg.worldcontrol.HowlerAlarmSoundRange", alarm);
         List<String> items = WCConfig.howlerAlarmSounds;
 
-
         listBox = new HowlerAlarmListBox(4, guiLeft + 13, guiTop + 63, 105, 65, items, alarm);
         buttonList.add(slider);
         buttonList.add(listBox);
-
     }
 
     @Override
@@ -55,9 +54,16 @@ public class GuiHowlerAlarm extends GuiContainer {
     }
 
     @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        drawDefaultBackground();
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        renderHoveredToolTip(mouseX,mouseY);
+    }
+
+    @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        fontRendererObj.drawString(name, (xSize - fontRendererObj.getStringWidth(name)) / 2, 6, 0x404040);
-        fontRendererObj.drawString(I18n.format("msg.worldcontrol.HowlerAlarmSound"), 12, 53, 0x404040);
+        fontRenderer.drawString(name, (xSize - fontRenderer.getStringWidth(name)) / 2, 6, 0x404040);
+        fontRenderer.drawString(I18n.format("msg.worldcontrol.HowlerAlarmSound"), 12, 53, 0x404040);
     }
 
     @Override

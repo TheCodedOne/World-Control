@@ -1,0 +1,71 @@
+msg.worldcontrol.creativetab=World Control
+
+item.worldcontrol.thermometer.name=Thermometer
+item.worldcontrol.time_card.name=Time Card
+item.worldcontrol.remote_panel.name=Portable Information Panel
+item.worldcontrol.ic2_reactor_card.name=EU Reactor Card
+item.worldcontrol.ic2_reactor_kit.name=EU Reactor Kit
+item.worldcontrol.ic2_energy_storage_kit.name=EU Energy Kit
+item.worldcontrol.ic2_energy_storage_card.name=EU Energy Card
+item.worldcontrol.tesla_power_kit.name=Tesla Energy Kit
+item.worldcontrol.tesla_power_card.name=Tesla Energy Card
+item.worldcontrol.forge_energy_kit.name=Forge Energy Kit
+item.worldcontrol.forge_energy_card.name=Forge Energy Card
+item.worldcontrol.fluid_kit.name=Fluid Kit
+item.worldcontrol.fluid_card.name=Fluid Card
+
+tile.tesla_average_counter.name=Tesla Average Counter
+tile.IndustrialAlarm.name=Industrial Alarm
+tile.HowlerAlarm.name=Howler Alarm
+
+fluid.mercury=Mercury
+
+#Thermometer
+msg.worldcontrol.thermometer.chat_info=Heat: %s
+msg.worldcontrol.thermometer.mode=Mode: %s
+msg.worldcontrol.thermometer.unset=Unset
+msg.worldcontrol.thermometer.mode.ic2=IndustrialCraft 2
+
+msg.worldcontrol.card.cords=X: %1$d Y: %2$d Z: %3$d
+msg.worldcontrol.card.no_cords=Missing cordinates
+
+msg.worldcontrol.timecard.time=Time: %s
+msg.worldcontrol.none=None
+msg.worldcontrol.average_counter_period=Period: %s sec
+
+#IC2 Reactor
+msg.worldcontrol.info_panel_on=On
+msg.worldcontrol.info_panel_off=Off
+msg.worldcontrol.info_panel_heat=T: %s
+msg.worldcontrol.info_panel_max_heat=MaxHeat: %s
+msg.worldcontrol.info_panel_melting=Melting: %s
+msg.worldcontrol.info_panel_output=Output: %s EU/t
+msg.worldcontrol.info_panel_time_remaining=Remaining: %s
+
+#IC2 Energy Storage
+msg.worldcontrol.eu_energy=Energy: %s EU
+msg.worldcontrol.eu_free=Free: %s EU
+msg.worldcontrol.eu_stored=Storage: %s EU
+msg.worldcontrol.fill_ratio=Fill: %s%%
+
+#Fluids
+msg.worldcontrol.liquid_name=Name: %s
+msg.worldcontrol.liquid_amount=Amount: %s
+msg.worldcontrol.liquid_capacity=Capacity: %s
+msg.worldcontrol.liquid_free=Free: %s
+msg.worldcontrol.liquid_percentage=Fill: %s%%
+
+#Tesla Energy System
+msg.worldcontrol.tesla_energy=Energy: %s T
+msg.worldcontrol.tesla_free=Free: %s T
+msg.worldcontrol.tesla_stored=Storage: %s T
+msg.worldcontrol.tesla.average=Average: %s T
+
+#Forge Energy System
+msg.worldcontrol.forge_energy=Energy: %s FE
+msg.worldcontrol.forge_free=Free: %s FE
+msg.worldcontrol.forge_stored=Storage: %s FE
+
+
+msg.worldcontrol.HowlerAlarmSoundRange=Sound range: %s
+msg.worldcontrol.HowlerAlarmSound=Sound

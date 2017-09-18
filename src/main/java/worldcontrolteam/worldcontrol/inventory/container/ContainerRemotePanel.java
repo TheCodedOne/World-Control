@@ -7,9 +7,11 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import worldcontrolteam.worldcontrol.api.card.IProviderCard;
+import worldcontrolteam.worldcontrol.init.WCItems;
 import worldcontrolteam.worldcontrol.inventory.InventoryItem;
 import worldcontrolteam.worldcontrol.inventory.SlotFilter;
-import worldcontrolteam.worldcontrol.init.WCItems;
+
+import javax.annotation.Nonnull;
 
 public class ContainerRemotePanel extends Container {
 
@@ -41,13 +43,14 @@ public class ContainerRemotePanel extends Container {
 	}
 
 	@Override
+	@Nonnull
 	public ItemStack transferStackInSlot(EntityPlayer player, int slot){
-		ItemStack stack = null;
+		ItemStack stack = ItemStack.EMPTY;
 		Slot slots = this.inventorySlots.get(slot);
 
-		if(slots.getStack() != null)
+		if(!slots.getStack().isEmpty())
 			if(slots.getStack().getItem() == WCItems.REMOTE_PANEL)
-				return null;
+				return ItemStack.EMPTY;
 
 		if(slots != null && slots.getHasStack()){
 			ItemStack itemstackR = slots.getStack();
@@ -64,22 +67,23 @@ public class ContainerRemotePanel extends Container {
 					}
 				}
 				if(!fixed)
-					return null;
+					return ItemStack.EMPTY;
 				slots.onSlotChange(itemstackR, stack);
 			}else if(slots.getStack().getItem() instanceof IProviderCard && !this.inventorySlots.get(0).getHasStack()){
 				this.inventorySlots.get(0).putStack(itemstackR);
 				slots.decrStackSize(1);
 				slots.onSlotChange(itemstackR, stack);
 				this.inventorySlots.get(0).onSlotChanged();
-			}else return null;
+			}else return ItemStack.EMPTY;
 		}
 		return stack;
 	}
 
 	@Override
+	@Nonnull
 	public ItemStack slotClick(int slot, int dragType, ClickType click, EntityPlayer player){
 		if(slot >= 0 && getSlot(slot) != null && getSlot(slot).getStack() == player.getHeldItemMainhand())
-			return null;
+			return ItemStack.EMPTY;
 		return super.slotClick(slot, dragType, click, player);
 	}
 }

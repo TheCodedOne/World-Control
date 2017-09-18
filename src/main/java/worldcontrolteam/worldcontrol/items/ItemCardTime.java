@@ -1,16 +1,16 @@
 package worldcontrolteam.worldcontrol.items;
 
-import java.util.List;
-
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import worldcontrolteam.worldcontrol.api.card.CardState;
 import worldcontrolteam.worldcontrol.api.card.StringWrapper;
 import worldcontrolteam.worldcontrol.utils.WCUtility;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemCardTime extends ItemBaseCard {
 
@@ -40,7 +40,8 @@ public class ItemCardTime extends ItemBaseCard {
 	@Override
 	public List<StringWrapper> getStringData(List<StringWrapper> list, int displaySettings, ItemStack card, boolean showLabels){
 		StringWrapper text = new StringWrapper();
-		text.textLeft = WCUtility.translateFormatted("time_card.time", card.getTagCompound().getString("time"));
+		//text.textLeft = WCUtility.translateFormatted("time_card.time", card.getTagCompound().getString("time"));
+		text.textCenter="Time: "+card.getTagCompound().getString("time");
 		list.add(text);
 		return list;
 	}
@@ -54,10 +55,9 @@ public class ItemCardTime extends ItemBaseCard {
 	public int getCardColor(){
 		return WCUtility.YELLOW;
 	}
-	
-	@SideOnly(Side.CLIENT)
+
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced){
-		//Overriding base, has no coords
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+
 	}
 }
