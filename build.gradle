@@ -24,7 +24,7 @@ configFile.withReader {
 	project.ext.config = new ConfigSlurper().parse prop
 }
 
-version = "1.0.1a" //newWorldControlVersion
+version = "1.0.1"
 group = "worldcontrolteam.worldcontrol"
 archivesBaseName = "worldcontrol"
 

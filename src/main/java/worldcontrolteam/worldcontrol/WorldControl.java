@@ -18,66 +18,53 @@ import worldcontrolteam.worldcontrol.items.ItemThermometer;
 import worldcontrolteam.worldcontrol.network.ChannelHandler;
 import worldcontrolteam.worldcontrol.network.GuiHandler;
 import worldcontrolteam.worldcontrol.utils.WCConfig;
-import worldcontrolteam.worldcontrol.utils.WCUtility;
 
 import java.io.File;
 import java.util.ArrayList;
 
-@Mod(modid = WorldControl.MODID, version = "@VERSION@")
+@Mod(modid = WorldControl.MODID, version = "@VERSION@", dependencies = "required-after:ic2")
 public class WorldControl {
 
-	@Mod.Instance(value = "worldcontrol")
-	public static WorldControl instance;
+    public static final String MODID = "worldcontrol";
+    @Mod.Instance(value = "worldcontrol")
+    public static WorldControl instance;
+    @SidedProxy(clientSide = "worldcontrolteam.worldcontrol.client.ClientProxy", serverSide = "worldcontrolteam.worldcontrol.CommonProxy")
+    public static CommonProxy PROXY;
+    public static WCCreativeTab TAB = new WCCreativeTab();
 
-	@SidedProxy(clientSide = "worldcontrolteam.worldcontrol.client.ClientProxy", serverSide = "worldcontrolteam.worldcontrol.CommonProxy")
-	public static CommonProxy proxy;
+    public static Side SIDE;
+    public static Modules modules = new Modules();
+    protected static ArrayList<IHeatSeeker> heatSeekers = new ArrayList<IHeatSeeker>();
 
-	public static final String MODID = "worldcontrol";
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        SIDE = event.getSide();
+        WCConfig.init(new File(event.getModConfigurationDirectory(), MODID + ".cfg"));
+        WorldControlAPI.init(new WCapiImpl());
+        PROXY.preinit(event);
 
-	public static WCCreativeTab TAB = new WCCreativeTab();
+        MinecraftForge.EVENT_BUS.register(WCItems.class);
+        MinecraftForge.EVENT_BUS.register(WCBlocks.class);
 
-	public static Side side; // As in client vs server
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+        ChannelHandler.init();
+        modules.preInit();
+    }
 
-	protected static ArrayList<IHeatSeeker> heatTypez = new ArrayList<IHeatSeeker>();
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
 
-	public static Modules modules = new Modules();
+        modules.init();
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event){
-		WCUtility.info("We are in pre-init!");
-		side = event.getSide();
-		WCConfig.init(new File(event.getModConfigurationDirectory(), MODID + ".cfg"));
-		WorldControlAPI.init(new WCapiImpl());
-		proxy.preinit(event);
+        ItemThermometer.addInHeatTypes(heatSeekers);
 
-		MinecraftForge.EVENT_BUS.register(WCItems.class);
-		MinecraftForge.EVENT_BUS.register(WCBlocks.class);
-		//WCItems.registerItems();
-		//WCBlocks.registerBlocks();
+        PROXY.init();
 
-		proxy.registerItemTextures();
+    }
 
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-		ChannelHandler.init();
-		modules.preInit();
-	}
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
 
-	@EventHandler
-	public void init(FMLInitializationEvent event){
-		WCUtility.info("We are in init!");
-
-		modules.init();
-
-		ItemThermometer.addInHeatTypes(heatTypez);
-
-		proxy.init();
-
-	}
-
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event){
-		WCUtility.info("We are in post-init!");
-
-		modules.postInit();
-	}
+        modules.postInit();
+    }
 }

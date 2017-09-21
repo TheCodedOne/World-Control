@@ -1,7 +1,6 @@
 package worldcontrolteam.worldcontrol.client.gui.features;
 
 
-import java.lang.reflect.Method;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
@@ -82,7 +81,7 @@ public class HowlerAlarmSlider extends GuiButton {
             setSliderPos(targetX);
             dragging = true;
             return true;
-        }else
+        } else
             return false;
     }
 

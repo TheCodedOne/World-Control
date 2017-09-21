@@ -6,9 +6,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class CommonProxy {
 
-	public void init(){
-	}
-	public void registerItemTextures(){}
+    public void init() {
+    }
 
-	public void preinit(FMLPreInitializationEvent event){}
+    public void preinit(FMLPreInitializationEvent event) {
+    }
 }

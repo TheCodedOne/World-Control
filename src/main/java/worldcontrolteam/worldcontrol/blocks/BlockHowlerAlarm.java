@@ -1,6 +1,7 @@
 package worldcontrolteam.worldcontrol.blocks;
 
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemDye;
@@ -13,9 +14,13 @@ import net.minecraft.world.World;
 import worldcontrolteam.worldcontrol.tileentity.TileEntityHowlerAlarm;
 import worldcontrolteam.worldcontrol.utils.GuiLib;
 
-public class BlockHowlerAlarm extends BlockIndustrialAlarm{
+import javax.annotation.ParametersAreNonnullByDefault;
 
-    public BlockHowlerAlarm(){
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+public class BlockHowlerAlarm extends BlockIndustrialAlarm {
+
+    public BlockHowlerAlarm() {
         super("HowlerAlarm");
     }
 
@@ -25,18 +30,18 @@ public class BlockHowlerAlarm extends BlockIndustrialAlarm{
     }
 
     @Override
-    public boolean hasGUI() {
+    public boolean hasGUI(IBlockState state) {
         return true;
     }
 
     @Override
-    public int guiID() {
+    public int guiID(IBlockState state) {
         return GuiLib.HOWLER_ALARM;
     }
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if(player.getHeldItem(hand) != ItemStack.EMPTY) {
+        if (player.getHeldItem(hand) != ItemStack.EMPTY) {
             if (player.getHeldItem(hand).getItem() instanceof ItemDye) {
                 int metacolor = player.getHeldItem(hand).getMetadata();
                 int color = ItemDye.DYE_COLORS[metacolor];

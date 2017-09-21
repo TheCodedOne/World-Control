@@ -18,35 +18,37 @@ import java.util.List;
 
 public abstract class ItemBaseCard extends WCBaseItem implements IProviderCard {
 
-	public ItemBaseCard(String name) {
-		super(name);
-	}
+    public ItemBaseCard(String name) {
+        super(name);
+    }
 
-	@Override
-	public abstract CardState update(World world, ItemStack card);
+    @Override
+    public abstract CardState update(World world, ItemStack card);
 
-	@Override
-	public abstract List<StringWrapper> getStringData(List<StringWrapper> list, int displaySettings, ItemStack card, boolean showLabels);
+    @Override
+    @SideOnly(Side.CLIENT)
+    public abstract List<StringWrapper> getStringData(List<StringWrapper> list, int displaySettings, ItemStack card, boolean showLabels);
 
-	@Override
-	public abstract List<String> getGuiData();
+    @Override
+    @SideOnly(Side.CLIENT)
+    public abstract List<String> getGuiData();
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public abstract int getCardColor();
+    @Override
+    @SideOnly(Side.CLIENT)
+    public abstract int getCardColor();
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		try{
-			NBTTagCompound nbt = stack.getTagCompound();
-			BlockPos pos = NBTUtils.getBlockPos(nbt);
-			int x = pos.getX();
-			int y = pos.getY();
-			int z = pos.getZ();
-			tooltip.add(WCUtility.translateFormatted("card.cords", x, y, z));
-		}catch (NullPointerException e){
-			tooltip.add(WCUtility.translate("card.no_cords"));
-		}
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        try {
+            NBTTagCompound nbt = stack.getTagCompound();
+            BlockPos pos = NBTUtils.getBlockPos(nbt);
+            int x = pos.getX();
+            int y = pos.getY();
+            int z = pos.getZ();
+            tooltip.add(WCUtility.translateFormatted("card.cords", x, y, z));
+        } catch (NullPointerException e) {
+            tooltip.add(WCUtility.translate("card.no_cords"));
+        }
+    }
 }

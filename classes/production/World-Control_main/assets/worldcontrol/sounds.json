@@ -1,4 +1,32 @@
 {
-    "alarm-default": {"category": "master","sounds": [{"name": "worldcontrol:alarm-default","stream": true}]},
-    "alarm-sci-fi": {"category": "master","sounds": [{"name": "worldcontrol:alarm-sci-fi","stream": true}]}
+    "alarm-default": {
+        "category": "master",
+        "subtitle": "wc.subtitle.alarm.alarm-default",
+        "sounds": [
+            {
+                "name": "worldcontrol:alarm-default",
+                "stream": true
+            }
+        ]
+    },
+    "alarm-sci-fi": {
+        "category": "master",
+        "subtitle": "wc.subtitle.alarm.sci-fi",
+        "sounds": [
+            {
+                "name": "worldcontrol:alarm-sci-fi",
+                "stream": true
+            }
+        ]
+    },
+    "alarm-air-raid": {
+        "category": "master",
+        "subtitle": "wc.subtitle.alarm.air-raid",
+        "sounds": [
+            {
+                "name": "worldcontrol:alarm-air-raid",
+                "stream": true
+            }
+        ]
+    }
 }

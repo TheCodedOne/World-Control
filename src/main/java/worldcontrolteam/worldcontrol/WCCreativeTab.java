@@ -4,24 +4,17 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import worldcontrolteam.worldcontrol.init.WCItems;
-import worldcontrolteam.worldcontrol.utils.WCUtility;
+import worldcontrolteam.worldcontrol.init.WCBlocks;
 
 public class WCCreativeTab extends CreativeTabs {
 
-	public WCCreativeTab() {
-		super("World Control");
-	}
+    public WCCreativeTab() {
+        super("worldcontrol");
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public ItemStack getTabIconItem(){
-		return new ItemStack(WCItems.THERMOMETER);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getTranslatedTabLabel(){
-		return WCUtility.translate("creativetab");
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public ItemStack getTabIconItem() {
+        return new ItemStack(WCBlocks.PANEL, 1, 1);
+    }
 }

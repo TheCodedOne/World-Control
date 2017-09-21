@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PIP",
+    "CHC",
+    "GIG"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "plateBronze"
+    },
+    "C": {
+      "item": "minecraft:repeater"
+    },
+    "P": {
+      "item": "ic2:glass",
+      "data": 0
+    },
+    "H": {
+      "item": "worldcontrol:howleralarm",
+      "data": 0
+    },
+    "G": {
+      "item": "ic2:cable",
+      "data": 3
+    }
+  },
+  "result": {
+    "item": "worldcontrol:industrialalarm",
+    "data": 0
+  }
+}

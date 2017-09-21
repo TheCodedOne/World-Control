@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "INI",
+    "CPC",
+    "GEG"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "plateIron"
+    },
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "circuitBasic"
+    },
+    "N": {
+      "item": "minecraft:noteblock"
+    },
+    "P": {
+      "item": "ic2:crafting",
+      "data": 6
+    },
+    "E": {
+      "item": "ic2:resource",
+      "data":12
+    },
+    "G": {
+      "item": "ic2:cable",
+      "data": 3
+    }
+  },
+  "result": {
+    "item": "worldcontrol:howleralarm",
+    "data": 0
+  }
+}

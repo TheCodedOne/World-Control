@@ -20,6 +20,10 @@ tile.HowlerAlarm.name=Howler Alarm
 
 fluid.mercury=Mercury
 
+nc.msg.notValid=This card may not be compatible
+nc.msg.notValid2=with the Remote Monitor
+nc.msg.notValid3=Try reopening the GUI
+
 #Thermometer
 msg.worldcontrol.thermometer.chat_info=Heat: %s
 msg.worldcontrol.thermometer.mode=Mode: %s

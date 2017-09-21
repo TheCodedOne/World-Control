@@ -8,52 +8,54 @@ import worldcontrolteam.worldcontrol.inventory.ISlotItemFilter;
 
 public abstract class TileEntityBaseAverageCounter extends TileEntity implements IItemHandler, ITickable, ISlotItemFilter {
 
-	ItemStack stack;
-	public short period;
+    public short period;
+    ItemStack stack;
 
-	public TileEntityBaseAverageCounter() {
-		this.period = 1;
-	}
+    public TileEntityBaseAverageCounter() {
+        this.period = 1;
+    }
 
-	@Override
-	public int getSlots(){
-		return 1;
-	}
+    @Override
+    public int getSlots() {
+        return 1;
+    }
 
-	@Override
-	public int getSlotLimit(int slot){return 64;}
+    @Override
+    public int getSlotLimit(int slot) {
+        return 64;
+    }
 
-	@Override
-	public ItemStack getStackInSlot(int slot){
-		return stack;
-	}
+    @Override
+    public ItemStack getStackInSlot(int slot) {
+        return stack;
+    }
 
-	@Override
-	public ItemStack insertItem(int slot, ItemStack stackl, boolean simulate){
-		if(stackl != null)
-			if(this.stack.getCount() < 5){
-				//TODO: Finish this code...
-			}
-		return null;
-	}
+    @Override
+    public ItemStack insertItem(int slot, ItemStack stackl, boolean simulate) {
+        if (stackl != null)
+            if (this.stack.getCount() < 5) {
+                //TODO: Finish this code...
+            }
+        return null;
+    }
 
-	@Override
-	public ItemStack extractItem(int slot, int amount, boolean simulate){
-		return null;
-	}
+    @Override
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+        return null;
+    }
 
-	@Override
-	public void update(){
-		countAverage();
-	}
+    @Override
+    public void update() {
+        countAverage();
+    }
 
-	public abstract void countAverage();
+    public abstract void countAverage();
 
-	public abstract int getAverage();
+    public abstract int getAverage();
 
-	public abstract String getPowerTranslateKey();
+    public abstract String getPowerTranslateKey();
 
-	public void setPeriod(short newPeriod){
-		period = newPeriod;
-	}
+    public void setPeriod(short newPeriod) {
+        period = newPeriod;
+    }
 }

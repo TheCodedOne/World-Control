@@ -4,11 +4,9 @@ package worldcontrolteam.worldcontrol.client.gui.features;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.FMLClientHandler;
 import org.lwjgl.opengl.GL11;
 import worldcontrolteam.worldcontrol.network.ChannelHandler;
 import worldcontrolteam.worldcontrol.network.messages.PacketUpdateHowlerAlarm;
@@ -28,12 +26,12 @@ public class HowlerAlarmListBox extends GuiButton {
     public int fontColor;
     public int selectedColor;
     public int selectedFontColor;
+    public int lineHeight;
+    public boolean dragging;
     private int scrollTop;
     private List<String> items;
     private TileEntityHowlerAlarm alarm;
-    public int lineHeight;
     private int sliderHeight;
-    public boolean dragging;
     private int sliderY;
     private int dragDelta;
 
@@ -49,6 +47,13 @@ public class HowlerAlarmListBox extends GuiButton {
         sliderHeight = 0;
         dragging = false;
         dragDelta = 0;
+    }
+
+    private static void draw(Tessellator tess, double x, double y, double z, float U, float V) {
+        tess.getBuffer().pos(x, y, z);
+        tess.getBuffer().tex(U, V);
+        tess.getBuffer().color(1.0f, 1.0f, 1.0f, 1.0f);
+        tess.getBuffer().endVertex();
     }
 
     private void scrollTo(int pos) {
@@ -148,13 +153,6 @@ public class HowlerAlarmListBox extends GuiButton {
 
         drawTexturedModalRect(sliderX, sliderY + sliderHeight - 1, 131, 19, SCROLL_WIDTH - 1, 1);
         GL11.glPopMatrix();
-    }
-
-    private static void draw(Tessellator tess, double x, double y, double z, float U, float V) {
-        tess.getBuffer().pos(x, y, z);
-        tess.getBuffer().tex(U, V);
-        tess.getBuffer().color(1.0f, 1.0f, 1.0f, 1.0f);
-        tess.getBuffer().endVertex();
     }
 
     private void setCurrent(int targetY) {
